@@ -1,3 +1,22 @@
+# pyeq3ng — fork of pyeq3 with scipy.odr dependency removed
+
+This is a fork of https://github.com/equations-project/pyeq3. The fork
+replaces scipy.odr (deprecated in scipy 1.17.0, slated for removal in
+1.19.0) with the independent odrpack package on PyPI. pyeq3's public
+API is preserved unchanged; internal implementation of ODR fitting and
+covariance estimation now go through odrpack.odr_fit.
+
+Primary consumer: zunzunsite3. See that project's
+`docs/superpowers/specs/2026-04-20-pyeq3ng-odr-port-design.md` for the
+migration rationale and validation strategy.
+
+Note: an earlier iteration of this fork targeted the dormant bitbucket
+pyeq3 (https://bitbucket.org/zunzuncode/pyeq3), then rebased onto
+equations-project/pyeq3 which is the upstream actually published to
+PyPI as `pyeq3`.
+
+---
+
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.6528718.svg)](https://doi.org/10.5281/zenodo.6528718)
 
 # pyeq3: an equation, curve and surface fitting library
