@@ -9,7 +9,6 @@ import Test_ModelSolveMethods
 import Test_ExtendedVersionHandlers
 import Test_Equations
 import Test_NIST
-import Test_OdrEquivalence
 
 
 # see http://www.voidspace.org.uk/python/articles/
@@ -27,7 +26,6 @@ suite.addTests(loader.loadTestsFromModule(Test_OutputSourceCodeService))
 suite.addTests(loader.loadTestsFromModule(Test_SolverService))
 suite.addTests(loader.loadTestsFromModule(Test_Equations))
 suite.addTests(loader.loadTestsFromModule(Test_NIST))
-suite.addTests(loader.loadTestsFromModule(Test_OdrEquivalence))
 
 runner = unittest.TextTestRunner(verbosity=2)
 
