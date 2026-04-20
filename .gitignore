@@ -4,3 +4,7 @@ pyeq3.egg-info/
 /docs/*pdf
 *.tmp
 *.pyc
+
+# uv scratch artifacts from local dev — pyproject.toml (Poetry) is authoritative
+.venv/
+uv.lock
