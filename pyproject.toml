@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "pyeq3"
-version = "12.6.2a0-ng"
+version = "12.6.2a0+ng"
 description = "An equation, curve and surface fitting library (pyeq3ng fork — scipy.odr replaced with odrpack)"
 readme = "README.md"
 readme-content-type = "text/x-rst"
