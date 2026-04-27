@@ -1,4 +1,4 @@
-# pyeq3ng — fork of pyeq3 with scipy.odr dependency removed
+# pyeq3-ng — fork of pyeq3 with scipy.odr dependency removed
 
 This is a fork of https://github.com/equations-project/pyeq3. The fork
 replaces scipy.odr (deprecated in scipy 1.17.0, slated for removal in

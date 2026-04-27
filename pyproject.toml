@@ -1,11 +1,11 @@
 [tool.poetry]
 name = "pyeq3"
 version = "12.6.2a0+ng"
-description = "An equation, curve and surface fitting library (pyeq3ng fork — scipy.odr replaced with odrpack)"
+description = "An equation, curve and surface fitting library (pyeq3-ng fork — scipy.odr replaced with odrpack)"
 readme = "README.md"
 readme-content-type = "text/x-rst"
 authors = ["James Phillips, Robert Myhill <bob.myhill@bristol.ac.uk>"]
-homepage = "https://github.com/kiloscheffer/pyeq3ng"
+homepage = "https://github.com/kiloscheffer/pyeq3-ng"
 license = "BSD"
 keywords = ["curve", "surface", "fitting"]
 classifiers = [
