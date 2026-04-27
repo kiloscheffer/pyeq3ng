@@ -259,11 +259,12 @@ class SolverService(object):
         logging.info("running SolveUsingODR")
         inModel.dataCache.FindOrCreateAllDataCache(inModel)
 
-        # Hoisted shared setup for the three retry branches: odrpack takes
-        # these per-call rather than via a separate Data object. The
-        # closure handles the scipy (beta, x) -> odrpack (x, beta)
-        # argument-order inversion while preserving pyeq3's
-        # WrapperForODR(self, inCoeffs, data) signature.
+        # Port from scipy.odr to odrpack.odr_fit — see IModel.py's
+        # CalculateCoefficientAndFitStatistics for the rationale.
+        # Hoisted shared setup because odrpack takes these per-call
+        # rather than via a separate Data object. The closure handles
+        # the scipy (beta, x) -> odrpack (x, beta) argument-order
+        # inversion while preserving WrapperForODR's signature.
         def _f(x, beta):
             return inModel.WrapperForODR(beta, x)
 
@@ -279,6 +280,9 @@ class SolverService(object):
 
         # try with initial coefficients equal to 1
         try:
+            # task="explicit-ODR" + diff_scheme="forward" match
+            # scipy.odr's set_job(fit_type=0, deriv=0): explicit ODR
+            # with forward-only finite differences for derivatives.
             out = odrpack.odr_fit(
                 _f,
                 xdata,

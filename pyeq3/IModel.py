@@ -370,13 +370,16 @@ class IModel(object):
             self.ci = None
             return
         else:
-            # Port from scipy.odr to odrpack.odr_fit. maxit=0 + fit_type=2
-            # (OLS, no iterations) in scipy.odr extracted covariance at
-            # the given beta0. odrpack rejects maxit=0, so use maxit=1 —
+            # Port from scipy.odr to odrpack.odr_fit. scipy.odr is
+            # deprecated in scipy 1.17 and slated for removal in 1.19.
+            # odrpack on PyPI wraps the same ODRPACK95 Fortran backend
+            # with a function-style API. maxit=0 + fit_type=2 (OLS, no
+            # iterations) in scipy.odr extracted covariance at the given
+            # beta0. odrpack rejects maxit=0 so we use maxit=1 — the
             # covariance/sd_beta are populated from a single evaluation,
             # matching scipy.odr's zero-iteration semantics. Arg-order
             # swap: scipy Model(f(beta, x)) vs odrpack odr_fit(f(x, beta)),
-            # handled inline via closure.
+            # handled inline via closure so WrapperForODR stays unchanged.
             self.dataCache.FindOrCreateAllDataCache(self)
 
             def _f(x, beta):
@@ -619,8 +622,7 @@ class IModel(object):
                 # (fit_type=2) with maxit=0 to compute the ODR residual
                 # at inCoeffs. Actual ODR solving happens in
                 # SolverService.SolveUsingODR. odrpack mapping:
-                # task="OLS", maxit=1 (its minimum). Arg-order swap
-                # handled inline via closure.
+                # task="OLS", maxit=1. Arg-order swap handled inline.
                 def _f(x, beta):
                     return self.WrapperForODR(beta, x)
 
