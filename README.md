@@ -1,19 +1,22 @@
-# pyeq3-ng — fork of pyeq3 with scipy.odr dependency removed
+# pyeq3-ng — soft fork of pyeq3 for numpy 2.x compatibility
 
-This is a fork of https://github.com/equations-project/pyeq3. The fork
-replaces scipy.odr (deprecated in scipy 1.17.0, slated for removal in
-1.19.0) with the independent odrpack package on PyPI. pyeq3's public
-API is preserved unchanged; internal implementation of ODR fitting and
-covariance estimation now go through odrpack.odr_fit.
+A soft fork of https://github.com/equations-project/pyeq3 maintained for
+downstream consumers (primarily zunzunsite3-ng) that need numpy 2.x.
+Upstream pins `numpy ^1.24` (which excludes 2.x); this fork relaxes that
+cap.
 
-Primary consumer: zunzunsite3. See that project's
-`docs/superpowers/specs/2026-04-20-pyeq3ng-odr-port-design.md` for the
-migration rationale and validation strategy.
+Other fork-local divergence from upstream:
 
-Note: an earlier iteration of this fork targeted the dormant bitbucket
-pyeq3 (https://bitbucket.org/zunzuncode/pyeq3), then rebased onto
-equations-project/pyeq3 which is the upstream actually published to
-PyPI as `pyeq3`.
+- Python `>=3.11` (upstream supports 3.8+).
+- `pypandoc` declared as a runtime dep — used by `pyeq3.Utilities.Multifit`
+  but missing from upstream's `pyproject.toml`.
+- PEP-440 local version identifier `+ng` so this fork coexists with
+  upstream `pyeq3` in pip resolution without name collisions.
+- Test infrastructure: `--strict` mode for `RunAllTests` (warnings → errors)
+  and a SyntaxWarning silencer in `Multifit.py`.
+
+The original reason for the fork — replacing the deprecated `scipy.odr`
+with `odrpack` — is now in upstream as PR #8, merged 2026-04-20.
 
 ---
 
